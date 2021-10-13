@@ -1,5 +1,15 @@
-.TodoCounter {
-	font-size: 24px;
+.counter__title,
+.counter__todos {
 	text-align: center;
 	font-family: "Noto Sans Mono", monospace;
+}
+
+.counter__title {
+	font-size: 24px;
+}
+
+.counter__todos {
+	font-size: 20px;
+	color: #f7f4ea;
+	margin: 8px 0;
 }
