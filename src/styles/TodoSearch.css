@@ -1,2 +1,36 @@
-.TodoSearch {
+.TodoSearch-container {
+	margin: 0 auto;
+	border-radius: 10rem;
+	border: 0.1rem solid #dfe1e5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.TodoSearch__input {
+	min-height: 4rem;
+	width: 18rem;
+	border: none;
+	outline: none;
+	margin-left: 2rem;
+	background-color: #c0b9dd;
+}
+
+.TodoSearch__input::placeholder {
+	text-align: center;
+	color: #dfe1e5;
+}
+
+.TodoSearch__input:focus {
+	outline-color: #eb9486;
+}
+
+.TodoSearch__icon {
+	background-image: url("../assets/search_icon.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	width: 2rem;
+	height: 2rem;
+	margin-right: 1.5rem;
 }
