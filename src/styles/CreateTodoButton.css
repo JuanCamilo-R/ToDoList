@@ -1,9 +1,14 @@
-button {
+.createTodoButton {
+	align-self: flex-end;
+
+	width: 50px;
+	max-width: 200px;
+	min-height: 20px;
+	margin-right: 5px;
+
 	border-radius: 15rem;
 	border: none;
 	background-color: #e2ece9;
-	align-self: center;
-	width: 80px;
-	max-width: 200px;
-	min-height: 20px;
+
+	z-index: 1;
 }

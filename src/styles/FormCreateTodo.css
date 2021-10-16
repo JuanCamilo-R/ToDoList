@@ -1,0 +1,53 @@
+.formContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	color: black;
+	font-family: "Noto Sans Mono", monospace;
+	font-size: 18px;
+	background-color: #c4bbb8;
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.formContainer__text {
+	margin: 10px 0px;
+	padding: 1rem;
+
+	border-radius: 10px;
+	border: none;
+
+	white-space: normal;
+	text-align: center;
+	text-align-last: center;
+}
+
+.formContainer__text::placeholder {
+	text-align: center;
+	font-family: "Noto Sans Mono", monospace;
+}
+
+.formContainer__text:focus {
+	outline: 2px solid #d8e2dc;
+}
+
+.buttonsContainer {
+	display: flex;
+	justify-content: space-around;
+	min-width: 200px;
+}
+
+.buttonsContainer__add,
+.buttonsContainer__cancel {
+	min-width: 60px;
+	min-height: 40px;
+
+	border-radius: 10px;
+	border: 1px solid #ece4db;
+}
+
+.buttonsContainer__add {
+	background-color: #d8e2dc;
+}
