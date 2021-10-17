@@ -1,0 +1,54 @@
+.formContainerLogin {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	margin: 0 auto;
+	position: fixed;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	color: black;
+	font-family: "Noto Sans Mono", monospace;
+	font-size: 18px;
+	font-weight: 300;
+	background-color: #ffe5d9;
+	padding: 1rem;
+	border-radius: 10px;
+}
+
+.formContainerLogin__main-title {
+	text-align: center;
+}
+
+.formLogin {
+	display: flex;
+	flex-direction: column;
+}
+
+.formLogin input {
+	border: none;
+	border-radius: 20px;
+	min-height: 30px;
+}
+
+.formLogin * {
+	text-align: center;
+	margin: 8px 0;
+}
+
+.formLogin span {
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.formLogin button {
+	border: none;
+	border-radius: 10px;
+
+	min-height: 30px;
+	font-family: "Noto Sans Mono", monospace;
+	font-weight: 400;
+}

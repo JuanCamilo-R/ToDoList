@@ -5,6 +5,7 @@ import { TodoCounter } from "../components/TodoCounter";
 import { TodoSearch } from "../components/TodoSearch";
 import { TodoList } from "../components/TodoList";
 import { TodoItem } from "../components/TodoItem";
+import { Header } from "../components/Header";
 import { CreateTodoButton } from "../components/CreateTodoButton";
 import { Modal } from "../components/Modal";
 import { TodoForm } from "../components/TodoForm";
@@ -18,9 +19,11 @@ function AppUI() {
 		deleteTodo,
 		openModal,
 		setOpenModal,
+		userName,
 	} = useContext(TodoContext);
 	return (
 		<React.Fragment>
+			<Header userName={userName} />
 			<TodoCounter />
 			<TodoSearch />
 
