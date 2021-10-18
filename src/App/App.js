@@ -26,6 +26,7 @@ function App() {
 							spanInfo={"¿No tienes cuenta?"}
 							spanLinkInfo={"Regístrate!"}
 							spanLink={"/signup"}
+							errorMessage={"Datos incorrectos"}
 						/>
 					</Route>
 					<Route exact path="/signup">
@@ -35,6 +36,9 @@ function App() {
 							spanLinkInfo={"Inicia sesión!"}
 							spanLink={"/login"}
 							submitText={"Crear cuenta"}
+							errorMessage={
+								"Hubo un error al crear tu cuenta, inténtalo otra vez"
+							}
 						/>
 					</Route>
 				</Switch>

@@ -12,6 +12,8 @@ function TodoProvider(props) {
 		error,
 	} = useLocalStorage("TODOS_V1", []);
 
+	const axios = require("axios");
+
 	const [searchValue, setSearchValue] = useState("");
 	const [userName, setUserName] = useState("");
 	const [openModal, setOpenModal] = useState(false);
@@ -56,6 +58,17 @@ function TodoProvider(props) {
 		saveTodos(newTodos);
 	};
 
+	const createUser = ({ name, password }) => {
+		return axios.post("http://localhost:8000/api/v1/users/", {
+			name,
+			password,
+		});
+	};
+
+	const logInUser = ({ name, password }) => {
+		return axios.post("http://localhost:8000/api/v1/auth", { name, password });
+	};
+
 	return (
 		<TodoContext.Provider
 			value={{
@@ -73,6 +86,8 @@ function TodoProvider(props) {
 				openModal,
 				userName,
 				setUserName,
+				createUser,
+				logInUser,
 			}}
 		>
 			{props.children}
