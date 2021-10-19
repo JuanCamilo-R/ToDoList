@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useLocalStorage } from "./useLocalStorage";
+import { useToken } from "./useToken";
 
 const TodoContext = React.createContext();
 
@@ -11,6 +12,8 @@ function TodoProvider(props) {
 		loading,
 		error,
 	} = useLocalStorage("TODOS_V1", []);
+
+	const { token, setToken } = useToken("USER_TOKEN");
 
 	const axios = require("axios");
 
@@ -88,6 +91,8 @@ function TodoProvider(props) {
 				setUserName,
 				createUser,
 				logInUser,
+				token,
+				setToken,
 			}}
 		>
 			{props.children}

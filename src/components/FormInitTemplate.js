@@ -12,8 +12,10 @@ function FormInitTemplate({
 	spanLink,
 	spanLinkInfo,
 	errorMessage,
+	saveInitToken,
 }) {
-	const { setUserName, createUser, logInUser } = useContext(TodoContext);
+	const { setUserName, createUser, logInUser, setToken } =
+		useContext(TodoContext);
 
 	const [userOnForm, setUserOnForm] = useState("");
 	const [userPasswordOnForm, setUserPasswordOnForm] = useState("");
@@ -21,16 +23,17 @@ function FormInitTemplate({
 
 	let history = useHistory();
 
-	const onSubmitLogIn = async (event) => {
+	const onSubmit = (event) => {
 		event.preventDefault();
-		if (spanLink === "/login") {
+		if (spanLink === "/") {
 			const user = {
 				name: userOnForm,
 				password: userPasswordOnForm,
 			};
 			createUser(user)
 				.then((res) => {
-					history.push("/login");
+					console.log(res);
+					history.push("/");
 				})
 				.catch((e) => {
 					setErrorOnSubmit(true);
@@ -43,10 +46,13 @@ function FormInitTemplate({
 			logInUser(user)
 				.then((res) => {
 					setUserName(userOnForm);
+					setToken(res.data);
+					console.log(res.data);
+					saveInitToken(res.data);
 					history.push("/");
-					setErrorOnSubmit(false);
 				})
 				.catch((e) => {
+					console.log(e);
 					setErrorOnSubmit(true);
 				});
 		}
@@ -63,7 +69,7 @@ function FormInitTemplate({
 	return (
 		<section className="formContainerLogin">
 			<h2 className="formContainerLogin__main-title">{mainTitle}</h2>
-			<form onSubmit={onSubmitLogIn} className="formLogin">
+			<form onSubmit={onSubmit} className="formLogin">
 				<label htmlFor="">Usuario</label>
 				<input
 					type="text"
