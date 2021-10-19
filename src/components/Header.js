@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-
-import { TodoContext } from "../TodoContext/index";
+import React from "react";
+import { useUserName } from "../TodoContext/useUserName";
 import "../styles/Header.css";
 
-function Header() {
-	const { userName } = useContext(TodoContext);
+function Header({ setToken }) {
+	const { userName, setUserName } = useUserName();
 
 	return (
 		<header className="header">
@@ -14,7 +13,14 @@ function Header() {
 					<p>{userName}</p>
 				</div>
 				<ul>
-					<li>Cerrar sesión</li>
+					<li
+						onClick={() => {
+							setToken(undefined);
+							setUserName(undefined);
+						}}
+					>
+						Cerrar sesión
+					</li>
 				</ul>
 			</div>
 		</header>

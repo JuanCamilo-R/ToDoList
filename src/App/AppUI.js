@@ -10,7 +10,7 @@ import { CreateTodoButton } from "../components/CreateTodoButton";
 import { Modal } from "../components/Modal";
 import { TodoForm } from "../components/TodoForm";
 
-function AppUI() {
+function AppUI({ setToken }) {
 	const {
 		error,
 		loading,
@@ -23,7 +23,7 @@ function AppUI() {
 	} = useContext(TodoContext);
 	return (
 		<React.Fragment>
-			<Header userName={userName} />
+			<Header userName={userName} setToken={setToken} />
 			<TodoCounter />
 			<TodoSearch />
 

@@ -14,6 +14,7 @@ import { useToken } from "../TodoContext/useToken";
 
 function App() {
 	const { token, setToken } = useToken("USER_TOKEN");
+	console.log(token);
 	return (
 		<Router>
 			<TodoProvider>
@@ -30,7 +31,7 @@ function App() {
 								saveInitToken={setToken}
 							/>
 						) : (
-							<AppUI />
+							<AppUI setToken={setToken} />
 						)}
 					</Route>
 					<Route exact path="/signup">

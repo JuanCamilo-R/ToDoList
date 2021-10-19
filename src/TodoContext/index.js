@@ -18,7 +18,6 @@ function TodoProvider(props) {
 	const axios = require("axios");
 
 	const [searchValue, setSearchValue] = useState("");
-	const [userName, setUserName] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
 	const totalTodos = todos.length;
@@ -87,8 +86,6 @@ function TodoProvider(props) {
 				deleteTodo,
 				setOpenModal,
 				openModal,
-				userName,
-				setUserName,
 				createUser,
 				logInUser,
 				token,

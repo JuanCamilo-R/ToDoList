@@ -51,12 +51,10 @@
 .header__menu:hover ul,
 ul:hover {
 	display: block;
+	cursor: pointer;
 }
 
 .header__menu li {
 	margin: 10px 0px;
 	font-size: 15px;
-}
-
-.header__menu--profile {
 }

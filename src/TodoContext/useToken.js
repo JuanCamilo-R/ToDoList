@@ -9,8 +9,13 @@ function useToken(tokenName) {
 	const [token, setToken] = useState(getToken());
 
 	const saveToken = (userToken) => {
-		sessionStorage.setItem(tokenName, userToken);
-		setToken(userToken);
+		if (userToken === undefined) {
+			sessionStorage.clear();
+			setToken(null);
+		} else {
+			sessionStorage.setItem(tokenName, userToken);
+			setToken(userToken);
+		}
 	};
 
 	return {

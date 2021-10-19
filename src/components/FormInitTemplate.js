@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { TodoContext } from "../TodoContext/index";
+import { useUserName } from "../TodoContext/useUserName";
 import "../styles/FormLogin.css";
 
 function FormInitTemplate({
@@ -14,8 +15,9 @@ function FormInitTemplate({
 	errorMessage,
 	saveInitToken,
 }) {
-	const { setUserName, createUser, logInUser, setToken } =
-		useContext(TodoContext);
+	const { createUser, logInUser, setToken } = useContext(TodoContext);
+
+	const { setUserName } = useUserName();
 
 	const [userOnForm, setUserOnForm] = useState("");
 	const [userPasswordOnForm, setUserPasswordOnForm] = useState("");
@@ -45,14 +47,11 @@ function FormInitTemplate({
 			};
 			logInUser(user)
 				.then((res) => {
-					setUserName(userOnForm);
 					setToken(res.data);
-					console.log(res.data);
+					setUserName(user.name);
 					saveInitToken(res.data);
-					history.push("/");
 				})
 				.catch((e) => {
-					console.log(e);
 					setErrorOnSubmit(true);
 				});
 		}
