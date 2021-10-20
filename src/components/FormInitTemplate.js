@@ -15,7 +15,7 @@ function FormInitTemplate({
 	errorMessage,
 	saveInitToken,
 }) {
-	const { createUser, logInUser, setToken } = useContext(TodoContext);
+	const { createUser, logInUser } = useContext(TodoContext);
 
 	const { setUserName } = useUserName();
 
@@ -47,7 +47,6 @@ function FormInitTemplate({
 			};
 			logInUser(user)
 				.then((res) => {
-					setToken(res.data);
 					setUserName(user.name);
 					saveInitToken(res.data);
 				})

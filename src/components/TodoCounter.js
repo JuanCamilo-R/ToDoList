@@ -3,13 +3,12 @@ import "../styles/TodoCounter.css";
 
 import { TodoContext } from "../TodoContext";
 
-function TodoCounter() {
-	const { totalTodos, completedTodos } = useContext(TodoContext);
+function TodoCounter({ totalTasks, completedTasks }) {
 	return (
 		<React.Fragment>
 			<h1 className="counter__title">To do list</h1>
 			<h2 className="counter__todos">
-				Has completado {completedTodos} de {totalTodos} TODOs
+				Has completado {completedTasks} de {totalTasks} TODOs
 			</h2>
 		</React.Fragment>
 	);

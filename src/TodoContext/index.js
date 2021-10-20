@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useLocalStorage } from "./useLocalStorage";
-import { useToken } from "./useToken";
+import { useTasks } from "./useTasks";
 
 const TodoContext = React.createContext();
 
@@ -13,52 +13,23 @@ function TodoProvider(props) {
 		error,
 	} = useLocalStorage("TODOS_V1", []);
 
-	const { token, setToken } = useToken("USER_TOKEN");
-
 	const axios = require("axios");
 
 	const [searchValue, setSearchValue] = useState("");
 	const [openModal, setOpenModal] = useState(false);
-	const completedTodos = todos.filter((todo) => !!todo.completed).length;
-	const totalTodos = todos.length;
 
-	let searchedTodos = [];
+	let searchedTasks = [];
 
 	if (searchValue.length === 0) {
-		searchedTodos = todos;
+		searchedTasks = todos;
 	} else {
-		searchedTodos = todos.filter((todo) => {
-			const todoText = todo.text.toLowerCase();
-			const searchText = searchValue.toLowerCase();
+		searchedTasks = todos.filter((todo) => {
+			const taskTitle = todo.title.toLowerCase();
+			const searchTitle = searchValue.toLowerCase();
 
-			return todoText.includes(searchText);
+			return taskTitle.includes(searchTitle);
 		});
 	}
-
-	const completeTodo = (text) => {
-		const todoIndex = todos.findIndex((todo) => todo.text === text);
-
-		const newTodos = [...todos];
-		newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
-		saveTodos(newTodos);
-	};
-
-	const addTodo = (text) => {
-		const newTodos = [...todos];
-		newTodos.push({
-			completed: false,
-			text,
-		});
-
-		saveTodos(newTodos);
-	};
-
-	const deleteTodo = (text) => {
-		const todoIndex = todos.findIndex((todo) => todo.text === text);
-		const newTodos = [...todos];
-		newTodos.splice(todoIndex, 1);
-		saveTodos(newTodos);
-	};
 
 	const createUser = ({ name, password }) => {
 		return axios.post("http://localhost:8000/api/v1/users/", {
@@ -76,20 +47,12 @@ function TodoProvider(props) {
 			value={{
 				loading,
 				error,
-				totalTodos,
-				completedTodos,
-				searchedTodos,
 				searchValue,
 				setSearchValue,
-				completeTodo,
-				addTodo,
-				deleteTodo,
 				setOpenModal,
 				openModal,
 				createUser,
 				logInUser,
-				token,
-				setToken,
 			}}
 		>
 			{props.children}

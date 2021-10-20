@@ -3,7 +3,7 @@ import { useState } from "react";
 function useToken(tokenName) {
 	const getToken = () => {
 		const tokenString = sessionStorage.getItem(tokenName);
-		return tokenString;
+		return JSON.parse(tokenString);
 	};
 
 	const [token, setToken] = useState(getToken());
@@ -13,7 +13,7 @@ function useToken(tokenName) {
 			sessionStorage.clear();
 			setToken(null);
 		} else {
-			sessionStorage.setItem(tokenName, userToken);
+			sessionStorage.setItem(tokenName, JSON.stringify(userToken));
 			setToken(userToken);
 		}
 	};
