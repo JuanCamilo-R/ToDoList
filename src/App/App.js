@@ -6,15 +6,9 @@ import { FormInitTemplate } from "../components/FormInitTemplate";
 import { TodoProvider } from "../TodoContext";
 import { useToken } from "../TodoContext/useToken";
 
-// const defaultTodos = [
-// 	{ text: "Cortar cebolla", completed: true },
-// 	{ text: "Tomar curso de Reactjs", completed: false },
-// 	{ text: "Estudiar Probabilidad y Estadistica", completed: false },
-// ];
-
 function App() {
 	const { token, setToken } = useToken("USER_TOKEN");
-	console.log(token);
+
 	return (
 		<Router>
 			<TodoProvider>
@@ -29,6 +23,7 @@ function App() {
 								spanLink={"/signup"}
 								errorMessage={"Datos incorrectos"}
 								saveInitToken={setToken}
+								htmlFor={"login"}
 							/>
 						) : (
 							<AppUI setToken={setToken} />
@@ -44,6 +39,7 @@ function App() {
 							errorMessage={
 								"Hubo un error al crear tu cuenta, inténtalo otra vez"
 							}
+							htmlFor={"create"}
 						/>
 					</Route>
 				</Switch>

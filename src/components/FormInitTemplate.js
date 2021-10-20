@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import Swal from "sweetalert2";
 
 import { Link, useHistory } from "react-router-dom";
 
@@ -14,6 +15,7 @@ function FormInitTemplate({
 	spanLinkInfo,
 	errorMessage,
 	saveInitToken,
+	htmlFor,
 }) {
 	const { createUser, logInUser } = useContext(TodoContext);
 
@@ -21,7 +23,6 @@ function FormInitTemplate({
 
 	const [userOnForm, setUserOnForm] = useState("");
 	const [userPasswordOnForm, setUserPasswordOnForm] = useState("");
-	const [errorOnSubmit, setErrorOnSubmit] = useState(false);
 
 	let history = useHistory();
 
@@ -38,7 +39,12 @@ function FormInitTemplate({
 					history.push("/");
 				})
 				.catch((e) => {
-					setErrorOnSubmit(true);
+					Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: "Hubo un error al crear la cuenta, tal vez el nombre de usuario ya está tomado",
+						position: "top",
+					});
 				});
 		} else {
 			const user = {
@@ -51,7 +57,13 @@ function FormInitTemplate({
 					saveInitToken(res.data);
 				})
 				.catch((e) => {
-					setErrorOnSubmit(true);
+					console.log(e);
+					Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: "Hubo un error en el login, revisa tus credenciales",
+						position: "top",
+					});
 				});
 		}
 	};
@@ -68,22 +80,23 @@ function FormInitTemplate({
 		<section className="formContainerLogin">
 			<h2 className="formContainerLogin__main-title">{mainTitle}</h2>
 			<form onSubmit={onSubmit} className="formLogin">
-				<label htmlFor="">Usuario</label>
+				<label htmlFor={htmlFor}>Usuario</label>
 				<input
 					type="text"
 					name="userName"
 					onChange={onChangeUserName}
+					value={userOnForm}
 					required
 				/>
-				<label htmlFor="">Contraseña</label>
+				<label htmlFor={htmlFor}>Contraseña</label>
 				<input
 					type="password"
 					name="password"
 					onChange={onChangeUserPassword}
+					value={userPasswordOnForm}
 					required
 				/>
 				<button type="submit">{submitText}</button>
-				{errorOnSubmit && <span>{errorMessage}</span>}
 				<span>
 					{spanInfo} <Link to={spanLink}>{spanLinkInfo}</Link>
 				</span>

@@ -17,6 +17,7 @@ function Header({ setToken }) {
 						onClick={() => {
 							setToken(undefined);
 							setUserName(undefined);
+							sessionStorage.clear();
 						}}
 					>
 						Cerrar sesión
