@@ -15,8 +15,6 @@ function AppUI({ setToken }) {
 	const { openModal, setOpenModal, userName } = useContext(TodoContext);
 
 	const {
-		tasks,
-		setTasks,
 		searchedTasks,
 		addTask,
 		loading,

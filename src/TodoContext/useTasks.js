@@ -6,7 +6,6 @@ function useTasks() {
 	const [loading, setLoading] = useState(true);
 	const completedTasks = tasks.filter((task) => !!task.completed).length;
 	const totalTasks = tasks.length;
-	// console.log(completedTasks, totalTasks);
 	const axios = require("axios");
 
 	let searchedTasks = [];
@@ -27,73 +26,54 @@ function useTasks() {
 		return JSON.parse(tokenString);
 	};
 
-	const getTask = (id) => {
-		return tasks.find((task) => task.id == id);
-	};
+	const addTask = async (info) => {
+		const newTasks = [...tasks];
 
-	const addTask = (info) => {
-		setLoading(true);
+		newTasks.push(info);
+		setTasks(newTasks);
+		await axios.post("http://localhost:8000/api/v1/tasks/", info);
 		axios
-			.post("http://localhost:8000/api/v1/tasks/", info)
-			.then((res) => {
-				axios
-					.post("http://localhost:8000/api/v1/auth/tasks", {
-						user_id: getToken().user_id,
-					})
-					.then(({ data }) => {
-						setTasks(data);
-						setLoading(false);
-					})
-					.catch((e) => {});
+			.post("http://localhost:8000/api/v1/auth/tasks", {
+				user_id: getToken().user_id,
 			})
-			.catch((e) => {});
+			.then(({ data }) => {
+				setTasks(data);
+			});
 	};
 
 	const completeTask = (taskId) => {
+		const taskIndex = tasks.findIndex((task) => task.id === taskId);
+		const updatedTasks = [...tasks];
+
+		updatedTasks[taskIndex].completed = !updatedTasks[taskIndex].completed;
+		setTasks(updatedTasks);
+		console.log(updatedTasks);
 		axios
 			.put(`http://localhost:8000/api/v1/tasks/${taskId}`, {
-				completed: !getTask(taskId).completed,
+				completed: updatedTasks[taskIndex].completed,
 			})
-			.then((res) => {
-				axios
-					.post("http://localhost:8000/api/v1/auth/tasks", {
-						user_id: getToken().user_id,
-					})
-					.then(({ data }) => {
-						setTasks(data);
-						setLoading(false);
-					})
-					.catch((e) => {});
-			})
-			.catch((e) => {});
+			.then((e) => {
+				console.log(updatedTasks[taskIndex].completed);
+			});
 	};
 
 	const deleteTask = (taskId) => {
-		axios
-			.delete(`http://localhost:8000/api/v1/tasks/${taskId}`)
-			.then((res) => {
-				axios
-					.post("http://localhost:8000/api/v1/auth/tasks", {
-						user_id: getToken().user_id,
-					})
-					.then(({ data }) => {
-						setTasks(data);
-						setLoading(false);
-					})
-					.catch((e) => {});
-			})
-			.catch((e) => {});
+		const taskIndex = tasks.findIndex((task) => task.id === taskId);
+		const updatedTasks = [...tasks];
+		updatedTasks.splice(taskIndex, 1);
+		setTasks(updatedTasks);
+
+		axios.delete(`http://localhost:8000/api/v1/tasks/${taskId}`);
 	};
 
 	useEffect(() => {
 		const axios = require("axios");
-
+		setLoading(true);
 		axios
 			.post("http://localhost:8000/api/v1/auth/tasks", {
 				user_id: getToken().user_id,
 			})
 			.then((res) => {
-				console.log(res);
 				setTasks(res.data);
 				setLoading(false);
 			})
